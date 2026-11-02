@@ -1,8 +1,10 @@
 # 문장 분석기 · Korean sentence analyzer
 
-A Mirinae-style breakdown of any Korean sentence you give it: each word split into
+Breakdown any Korean sentence you give it: each word split into
 morphemes with part of speech and meaning, brackets grouping phrases and clauses,
 grammar notes with examples from your other sentences, and text-to-speech.
+
+Try it: https://korean-flashcards-yk5n.onrender.com/](https://korean-sentence-analyzer.onrender.com
 
 - **Type or paste** a sentence or a whole paragraph (it is split into sentences).
 - **Import subtitles** (.srt or .vtt, UTF-8 or EUC-KR). Add the same episode's English
