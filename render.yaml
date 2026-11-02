@@ -1,0 +1,23 @@
+# Render Blueprint: a free static site. No server or database; everything runs in the browser.
+services:
+  - type: web
+    name: korean-sentence-analyzer
+    runtime: static
+    buildCommand: npm ci && bash scripts/fetch-model.sh && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+    headers:
+      # The model (~84 MB) keeps its URLs across Kiwi versions, so a week rather than forever;
+      # the app also keeps it in Cache Storage under a versioned name (src/lib/kiwi.worker.ts).
+      - path: /model/*
+        name: Cache-Control
+        value: public, max-age=604800
+      # Built assets have content hashes in their names.
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /data/*
+        name: Cache-Control
+        value: public, max-age=86400

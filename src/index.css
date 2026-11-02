@@ -1,0 +1,135 @@
+@import 'tailwindcss';
+
+/* Dark mode is a user toggle: the `dark` class on <html> (see src/theme.ts). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Palette: green #80EF80, pale lime #E3F0A3, sage #BADBA2, emerald #42D674.
+ * All four are light, so they are fills (buttons, highlights, chips, lines),
+ * never text: text is a near-black green, with a deeper green for links and
+ * headers. The breakdown keeps one hue per phrase type. Every text colour is
+ * at least 4.5:1 against bg and panel.
+ */
+@theme static {
+  --font-sans: 'Noto Sans KR', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --color-bg: #ffffff;
+  /* The dots of the dot-grid background */
+  --color-grid: #cfd8cf;
+  --color-panel: #ffffff;
+  --color-ink: #1e2b22;
+  --color-body: #2f3d33;
+  --color-muted: #5b6a5f;
+  --color-row: #f3f9e2;
+  --color-chip: #e3f0a3;
+  --color-chip-text: #1e2b22;
+  --color-divider: #badba2;
+  /* Primary buttons and selected toggles: emerald with dark text (green behind white text is unreadable). */
+  --color-navy: #42d674;
+  --color-on-navy: #10301c;
+  --color-accent: #42d674;
+  /* Deep green for small link text. */
+  --color-accent-text: #1f7a43;
+  --color-highlight: rgba(128, 239, 128, 0.55);
+  --color-scrim: rgba(30, 43, 34, 0.32);
+  --color-danger: #b23a2c;
+  --color-warn: #f6efc4;
+  --color-warn-ink: #6b5420;
+
+  /* The breakdown, after Mirinae: eojeols in deep green, word meanings in terracotta, grammar in plum. */
+  --color-eojeol: #2c7a4b;
+  --color-meaning: #a35839;
+  --color-grammar: #7e5a86;
+
+  /* One colour per phrase type, used for brackets and the sentence at the top. */
+  --color-ph-object: #4c6b94;
+  --color-ph-subject: #537150;
+  --color-ph-topic: #47716c;
+  --color-ph-adverbial: #86632d;
+  --color-ph-complement: #46707e;
+  --color-ph-quote: #6a6a63;
+  --color-ph-noun: #5b6a5f;
+  --color-ph-verb: #a94d3c;
+  --color-ph-adjective: #995571;
+  --color-ph-predicate: #875a8c;
+  --color-ph-interjection: #6a6a63;
+  --color-ph-subordinate: #8e4b5a;
+  --color-ph-main: #1e2b22;
+
+  --radius-panel: 14px;
+}
+
+:root {
+  color-scheme: light;
+  --panel-shadow: 0 8px 24px -12px rgba(30, 60, 40, 0.22);
+}
+
+.dark {
+  color-scheme: dark;
+  /* Neutral charcoal surfaces; green appears only as an accent (buttons, selection, highlight, headers). */
+
+  --color-bg: #1b1c1e;
+  --color-grid: #2e3033;
+  --color-panel: #232528;
+  --color-ink: #e8eae6;
+  --color-body: #d6d9d3;
+  --color-muted: #a3a8a1;
+  --color-row: #2c2f32;
+  --color-chip: #33363a;
+  --color-chip-text: #e3f0a3;
+  --color-divider: #3a3d41;
+  --color-navy: #42d674;
+  --color-on-navy: #10301c;
+  --color-accent: #42d674;
+  --color-accent-text: #badba2;
+  --color-highlight: rgba(66, 214, 116, 0.28);
+  --color-scrim: rgba(0, 0, 0, 0.55);
+  --color-danger: #f0a596;
+  --color-warn: #3d3a24;
+  --color-warn-ink: #e3f0a3;
+
+  --color-eojeol: #badba2;
+  --color-meaning: #eb9b72;
+  --color-grammar: #cfa3d8;
+
+  --color-ph-object: #7fa3d9;
+  --color-ph-subject: #8cc283;
+  --color-ph-topic: #6fc2b8;
+  --color-ph-adverbial: #e0b25e;
+  --color-ph-complement: #6fbfd6;
+  --color-ph-quote: #c4c4b8;
+  --color-ph-noun: #badba2;
+  --color-ph-verb: #ef8f78;
+  --color-ph-adjective: #e48fb3;
+  --color-ph-predicate: #c99ad3;
+  --color-ph-interjection: #c4c4b8;
+  --color-ph-subordinate: #e88fa3;
+  --color-ph-main: #eef6e4;
+
+  --panel-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.6);
+}
+
+@utility shadow-panel {
+  box-shadow: var(--panel-shadow);
+}
+
+/* Marker highlight, e.g. behind the matching words in grammar examples */
+@utility bg-highlight {
+  background: linear-gradient(transparent 58%, var(--color-highlight) 58%);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    /* Dot grid */
+    background-image: radial-gradient(circle, var(--color-grid) 1px, transparent 1.4px);
+    background-size: 16px 16px;
+    color: var(--color-ink);
+    @apply antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+}

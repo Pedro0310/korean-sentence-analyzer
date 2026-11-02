@@ -1,0 +1,4 @@
+node_modules
+dist
+data/krdict-xml
+public/model
